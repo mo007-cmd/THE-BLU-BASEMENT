@@ -5,8 +5,8 @@ import App from "./App.jsx";
 import "./styles.css";
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <BrowserRouter basename="/THE-BLU-BASEMENT">
+  <App />
+</BrowserRouter>
   </React.StrictMode>,
 );

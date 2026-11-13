@@ -27,6 +27,9 @@ import { chapters } from "./chapters";
 const rain =
   "https://images.unsplash.com/photo-1519692933481-e162a57d6721?auto=format&fit=crop&w=2000&q=85";
 
+// Keeps local images and music working on localhost and GitHub Pages.
+const publicAsset = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
+
 function getProgress() {
   try {
     return JSON.parse(
@@ -77,7 +80,7 @@ function MusicPlayer({ chapterNumber, chapterTitle }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.3);
   const [error, setError] = useState("");
-  const track = `/music/chapter-${chapterNumber}.mp3`;
+  const track = publicAsset(`music/chapter-${chapterNumber}.mp3`);
 
   function fadeTo(target, duration = 650) {
     const audio = audioRef.current;
@@ -271,7 +274,7 @@ function Story() {
         {/* Chapter artwork */}
         <div className={`art art${chapter.number}`}>
           <img
-            src={`/media/Chapter ${chapter.number}.png`}
+            src={publicAsset(`media/Chapter ${chapter.number}.png`)}
             alt={`Chapter ${chapter.number}: ${chapter.title}`}
             className="chapter-card-image"
             loading="lazy"
@@ -336,11 +339,11 @@ function Reader() {
     paragraph.toUpperCase() !== chapter.title.toUpperCase()
   );
   const chapterImages = {
-    1: "/media/Chapter 1.png", 2: "/media/Chapter 2.png", 3: "/media/Chapter 3.png", 4: "/media/Chapter 4.png",
-    5: "/media/Chapter 5.png", 6: "/media/Chapter 6.png", 7: "/media/Chapter 7.png", 8: "/media/Chapter 8.png",
-    9: "/media/Chapter 9.png", 10: "/media/Chapter 10.png", 11: "/media/Chapter 11.png", 12: "/media/Chapter 12.png",
-    13: "/media/Chapter 13.png", 14: "/media/Chapter 14.png", 15: "/media/Chapter 15.png", 16: "/media/Chapter 16.png",
-    17: "/media/Chapter 17.png", 18: "/media/Chapter 18.png", 19: "/media/Chapter 19.png", 20: "/media/Chapter 20.png"
+    1: publicAsset("media/Chapter 1.png"), 2: publicAsset("media/Chapter 2.png"), 3: publicAsset("media/Chapter 3.png"), 4: publicAsset("media/Chapter 4.png"),
+    5: publicAsset("media/Chapter 5.png"), 6: publicAsset("media/Chapter 6.png"), 7: publicAsset("media/Chapter 7.png"), 8: publicAsset("media/Chapter 8.png"),
+    9: publicAsset("media/Chapter 9.png"), 10: publicAsset("media/Chapter 10.png"), 11: publicAsset("media/Chapter 11.png"), 12: publicAsset("media/Chapter 12.png"),
+    13: publicAsset("media/Chapter 13.png"), 14: publicAsset("media/Chapter 14.png"), 15: publicAsset("media/Chapter 15.png"), 16: publicAsset("media/Chapter 16.png"),
+    17: publicAsset("media/Chapter 17.png"), 18: publicAsset("media/Chapter 18.png"), 19: publicAsset("media/Chapter 19.png"), 20: publicAsset("media/Chapter 20.png")
   };
   const visual = chapterImages[chapter.number] || null;
   const moodNames = ["Rain at Pillar 287", "Butter, garlic & silence", "The impossible garden", "A door behind the wall", "The memory of her mother", "A quiet kind of safety", "Blu Land", "The warm library"];
@@ -415,7 +418,7 @@ function Author() {
           <div className="author-portrait-frame">
             <img
               className="author-portrait"
-              src="/media/author-photo.jpg"
+              src={publicAsset("media/author-photo.jpg")}
               alt="Gobinda Panda, author of The Blu Basement"
             />
             
@@ -426,7 +429,7 @@ function Author() {
 
             <img
               className="author-neon-signature"
-              src="/media/blu-author-signature.png"
+              src={publicAsset("media/blu-author-signature.png")}
               alt="Author's neon signature"
             />
           </div>
